@@ -127,6 +127,7 @@ def getAllPositions(request):
     list=[]
     data = mongo_posiiotn.getPositions()
     list.append(data)
+    print(list)
     return HttpResponse(list)
 
 
