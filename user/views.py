@@ -193,7 +193,7 @@ def getDeliveryRecordByid(request):
 
                        'pr_date':data_pr_date.split('.')[0]
                    }
-                   print(record)
+                   # print(record)
                    # r=eval(serialize('json',r))
                    # del r['model']
                    # r['fields']['pr_date']=r['fields']['pr_date'].split('.')[0].replace('T',' ')
