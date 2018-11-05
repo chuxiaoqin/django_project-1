@@ -105,11 +105,11 @@ DATABASES = {
 # 关于数据库的配置
 'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME':'dj_jobapp',
-         'USER':'root',
+         'NAME':'pdd',
+         'USER':'fj',
          'PASSWORD':'1234',
-         'HOST':'127.0.0.1',
-         'PORT':'3306'
+         'HOST':'cdb-4hg425ql.gz.tencentcdb.com',
+         'PORT':'10034'
 
 
     }
