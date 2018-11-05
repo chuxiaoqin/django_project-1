@@ -11,6 +11,9 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from  .models import user
 import  json
 import re
+import  resume.views
+import  resume.models
+import time
 # Create your views here.
 '''
 此模块方法未测试
@@ -153,3 +156,57 @@ def getUserIdByName(request,username):
 
     return JsonResponse({'id':uid})
 
+def getDeliveryRecordByid(request):
+    if request.method=='GET':
+        token=request.META.get('HTTP_TOKEN')
+        # print(token)
+    else:
+        token = request.META.get('HTTP_TOKEN')
+    result=deToken(token)
+
+    if result['statuscode']and not result['statuscode'] == '400':
+        #在token中获取用户信息
+        uu=result['user']
+        #获取用户id
+        uid=user.objects.get(user_tel=uu).id
+        #获取该用户的所有简历
+        resumes=resume.models.resume.objects.filter(user__id=uid)
+        data=[]
+        for resu in resumes:
+
+           records=resume.models.position_and_resuem.objects.filter(resume_id=resu.id)
+           # print(list(records))
+
+           # records=serialize('json',records)
+           # records=eval(records)
+           for r in list(records):
+               if r:
+                   del r.position.__dict__['_state']
+                   del r.resume.__dict__['_state']
+                   data_position=r.position.__dict__
+                   data_resume=r.resume.__dict__
+                   data_pr_date=str(r.pr_date)
+                   record={
+                       'id':r.id,
+                       'position':data_position,
+                       'resume':data_resume,
+
+                       'pr_date':data_pr_date.split('.')[0]
+                   }
+                   print(record)
+                   # r=eval(serialize('json',r))
+                   # del r['model']
+                   # r['fields']['pr_date']=r['fields']['pr_date'].split('.')[0].replace('T',' ')
+
+                   data.append(record)
+
+
+
+        #根据id排序
+        data=sorted(data,key=lambda x: x['id'])
+        # print(data)
+
+
+        # print(time.mktime(time.strptime(data[0]['fields']['pr_date'].split('.')[0].replace('T',' '),'%Y-%m-%d %H:%M:%S')))
+
+    return HttpResponse(json.dumps(data))

@@ -41,7 +41,16 @@ def  commitResuem(request):
 #通过用户id获取简历
 
 def getResuemsByuid(request):
-    token=request.META.get('HTTP_TOKEN')
+
+    if request.method=='GET':
+
+        token=request.META.get('HTTP_TOKEN')
+        print(token)
+    else:
+        token = request.META.get('HTTP_TOKEN')
+
+
+
     result=deToken(token)
 
     if result['statuscode']and not result['statuscode'] == '400':
@@ -58,7 +67,7 @@ def getResuemsByuid(request):
 
             data.append(resu)
 
-        print(data)
+
 
     return HttpResponse(json.dumps(data))
 

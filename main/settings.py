@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
 # 'www.pdd.com',
 '127.0.0.1',
 'localhost:63343',
+    '*'
 
 ]
 
@@ -167,8 +168,9 @@ CORS_ORIGIN_WHITELIST = (
     'localhost',
     'pdd.com',
     'www.pdd.com',
-"localhost:58062",
-    '127.0.0.1:8080'
+    "localhost:58062",
+    '127.0.0.1:8080',
+    '*'
 )
 # 跨域允许请求的方法
 CORS_ALLOW_METHODS = (
@@ -193,7 +195,8 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
     'Pragma',
-    'token'
+    'token',
+    'header'
 
 )
 

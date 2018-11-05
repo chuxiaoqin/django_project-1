@@ -16,6 +16,7 @@ urlpatterns = [
     url(r"getmanagerbyid/(?P<cid>\w+)",views.getManagerById),
     # 通过username获取用户id
     url(r'getuseridbyname/(?P<username>\w+)', views.getUserIdByName),
+    url(r'getdeliveryrecordbyid/', views.getDeliveryRecordByid),
 
 
 
