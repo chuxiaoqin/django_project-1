@@ -45,7 +45,7 @@ def getResuemsByuid(request):
     if request.method=='GET':
 
         token=request.META.get('HTTP_TOKEN')
-        print(token)
+        # print(token)
     else:
         token = request.META.get('HTTP_TOKEN')
 
